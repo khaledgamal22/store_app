@@ -35,8 +35,7 @@ class HomePage extends StatelessWidget {
         padding: const EdgeInsets.only(
           top: 50,
         ),
-        child: BlocConsumer<HomeCubit, HomeState>(
-          listener: (context,state){},
+        child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state){
             BlocProvider.of<HomeCubit>(context).getProduct();
             if(state is HomeSuccess){
@@ -60,11 +59,8 @@ class HomePage extends StatelessWidget {
                 child: Text('there was an error,please try again',style: TextStyle(fontSize: 30),),
               );
             }
-            else if(state is HomeLoading){
+            else {
               return Center(child: CircularProgressIndicator(),);
-            }
-            else{
-              return Center(child: Text('LOADING.....'),);
             }
           },
         ),

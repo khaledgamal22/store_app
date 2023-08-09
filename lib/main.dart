@@ -8,14 +8,24 @@ import 'package:store/pages/update_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main(){
-  runApp(StoreApp());
+  runApp(const StoreApp());
 }
 
 
 
-class StoreApp extends StatelessWidget {
+class StoreApp extends StatefulWidget {
   const StoreApp({super.key});
 
+  @override
+  State<StoreApp> createState() => _StoreAppState();
+}
+
+class _StoreAppState extends State<StoreApp> {
+  @override
+  void initState() async{
+    await BlocProvider.of<HomeCubit>(context).getProduct();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  MultiBlocProvider(
