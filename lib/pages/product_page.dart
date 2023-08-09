@@ -1,16 +1,16 @@
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/custom_componant/custom_button.dart';
 import 'package:store/models/product_model.dart';
-import 'package:store/models/productprovider.dart';
 import 'package:store/pages/update_page.dart';
+import 'cubits/cart_cubit/cart_cubit.dart';
 
 class ProductPage extends StatelessWidget {
 
   static String id='product_page';
   
-  ProductPage({super.key});
+  const ProductPage({super.key});
 
 
 
@@ -30,31 +30,31 @@ class ProductPage extends StatelessWidget {
               height: 300,
               width: 300,
               ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
             Text(product.title),
-            SizedBox(height: 20,),
-            Text('description : '),
-            SizedBox(height: 5,),
+            const SizedBox(height: 20,),
+            const Text('description : '),
+            const SizedBox(height: 5,),
             Container(
               child: Text(product.discreption,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black
                 ),
               ),
             ),
-            SizedBox(height: 50,),
+            const SizedBox(height: 50,),
             Text('Category : ${product.category}'),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Text('Price :  ${product.price}'),
-            SizedBox(height: 40,),
+            const SizedBox(height: 40,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomButton(text: 'Add to card', onpressed: (){
-                  Provider.of<ProductProvider>(context,listen: false).productlist.add(product);
+                  BlocProvider.of<CartCubit>(context).AddProductToCart(product);
                 },
                 ),
-                SizedBox(width: 10,),
+                const SizedBox(width: 10,),
                 CustomButton(text: 'Update', onpressed: (){
                   Navigator.pushNamed(context, UpdatePage.id,arguments: product);
                 },

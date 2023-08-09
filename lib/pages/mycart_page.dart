@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store/models/product_model.dart';
-import 'package:store/models/productprovider.dart';
-
 import '../custom_componant/custom_card.dart';
+import 'cubits/cart_cubit/cart_cubit.dart';
 
 class MyCartPage extends StatelessWidget {
-  MyCartPage({super.key});
+  const MyCartPage({super.key});
 
-  static String id='cart_page';
-  List<ProductModal> productlist=[];
+  static String id = 'cart_page';
 
   @override
   Widget build(BuildContext context) {
@@ -18,22 +16,30 @@ class MyCartPage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        title: Text('My Cart',style: TextStyle(color: Colors.blue),),
+        title: const Text(
+          'My Cart',
+          style: TextStyle(color: Colors.blue),
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 50),
-        child: GridView.builder(
-                  itemCount: productlist.length,
-                  clipBehavior: Clip.none,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 50,
-                    crossAxisSpacing: 0,
-                  ),
-                  itemBuilder: (context,index){
-                    return CustomCard(product: productlist[index]);
-                  },
-                ),
+      body: BlocBuilder<CartCubit, CartState>(
+        builder: (context, state) {
+          List<ProductModal> cartlist=BlocProvider.of<CartCubit>(context).cartList;
+          return Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: GridView.builder(
+              itemCount: cartlist.length,
+              clipBehavior: Clip.none,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 50,
+                crossAxisSpacing: 0,
+              ),
+              itemBuilder: (context, index) {
+                return CustomCard(product: cartlist[index]);
+              },
+            ),
+          );
+        },
       ),
     );
   }
