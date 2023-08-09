@@ -10,7 +10,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super((HomeInitial()));
   List<ProductModal> products=[];
 
-  Future<void> getProduct()async{
+  void getProduct()async{
     emit(HomeLoading());
     try{
       products=await AllProductsService().getAllProducts();

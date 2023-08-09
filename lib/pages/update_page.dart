@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:store/custom_componant/custom_button.dart';
 import 'package:store/custom_componant/custom_textfeild.dart';
 import 'package:store/models/product_model.dart';
-import 'package:store/services/add_product_service.dart';
 import 'package:store/services/update_product_service.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class UpdatePage extends StatefulWidget {
 
   static String id='update_page';
+
+  const UpdatePage({super.key});
 
   @override
   State<UpdatePage> createState() => _UpdatePageState();

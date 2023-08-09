@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:store/pages/addproduct_page.dart';
+import 'package:store/pages/cubits/cart_cubit/cart_cubit.dart';
 import 'package:store/pages/cubits/home_cubit/home_cubit.dart';
 import 'package:store/pages/home_page.dart';
 import 'package:store/pages/mycart_page.dart';
@@ -8,24 +9,18 @@ import 'package:store/pages/update_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main(){
-  runApp(const StoreApp());
+  runApp( const StoreApp());
+  
 }
 
 
 
-class StoreApp extends StatefulWidget {
+
+
+class StoreApp extends StatelessWidget {
   const StoreApp({super.key});
 
-  @override
-  State<StoreApp> createState() => _StoreAppState();
-}
-
-class _StoreAppState extends State<StoreApp> {
-  @override
-  void initState() async{
-    await BlocProvider.of<HomeCubit>(context).getProduct();
-    super.initState();
-  }
+  
   @override
   Widget build(BuildContext context) {
     return  MultiBlocProvider(
@@ -33,6 +28,9 @@ class _StoreAppState extends State<StoreApp> {
         BlocProvider(
           create: (context) =>HomeCubit(),
         ),
+        BlocProvider(
+          create: (context) => CartCubit(),
+        )
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
