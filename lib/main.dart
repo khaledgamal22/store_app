@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:store/pages/addproduct_page.dart';
+import 'package:store/pages/cubits/add_cubit/add_cubit.dart';
 import 'package:store/pages/cubits/cart_cubit/cart_cubit.dart';
 import 'package:store/pages/cubits/home_cubit/home_cubit.dart';
 import 'package:store/pages/home_page.dart';
@@ -30,7 +31,10 @@ class StoreApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => CartCubit(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => AddCubit(),
+        ),
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
